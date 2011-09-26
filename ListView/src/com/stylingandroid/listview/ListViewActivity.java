@@ -1,9 +1,7 @@
 package com.stylingandroid.listview;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,7 +11,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.SimpleAdapter;
 
 public class ListViewActivity extends Activity
 {
@@ -23,19 +20,13 @@ public class ListViewActivity extends Activity
 		super.onCreate( savedInstanceState );
 		setContentView( R.layout.main );
 
-		List<Map<String, String>> data = new ArrayList<Map<String, String>>();
+		List<String> data = new ArrayList<String>();
 		for ( int i = 1; i <= 10; i++ )
 		{
-			Map<String, String> item = new HashMap<String, String>();
-			item.put( "name", String.format( "Item %d", i ) );
-			data.add( item );
+			data.add( String.format( "Item %d", i ) );
 		}
 
-		String[] from = { "name" };
-		int[] to = { android.R.id.text1 };
-
-		SimpleAdapter adapter = new SimpleAdapter( this, data,
-				android.R.layout.simple_list_item_1, from, to );
+		CustomAdapter adapter = new CustomAdapter( this, data );
 		
 		ListView listView = (ListView)findViewById( android.R.id.list );
 		listView.setAdapter( adapter );
